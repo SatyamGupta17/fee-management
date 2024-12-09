@@ -5,9 +5,9 @@ import ChartTwo from "./ChartTwo";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const ChartThree = dynamic(() => import("./ChartThree"), {
-  ssr,
-});
+// const ChartThree = dynamic(() => import("./ChartThree"), {
+//   ssr,
+// });
 
 const Chart= () => {
   return (
@@ -17,7 +17,7 @@ const Chart= () => {
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
         <ChartOne />
         <ChartTwo />
-        <ChartThree />
+        {/* <ChartThree /> */}
       </div>
     </>
   );

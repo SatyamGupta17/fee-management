@@ -1,12 +1,11 @@
 "use client";
 
 // import { ApexOptions } from "apexcharts";
-import React from "react";
-import dynamic from "next/dynamic";
+import React from "react"; 
 
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
+// const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+//   ssr: false,
+// });
 
 const options = {
   colors: ["#3C50E0", "#80CAEE"],
@@ -135,13 +134,13 @@ const ChartTwo= () => {
 
       <div>
         <div id="chartTwo" className="-mb-9 -ml-5">
-          <ReactApexChart
+          {/* <ReactApexChart
             options={options}
             series={series}
             type="bar"
             height={350}
             width={"100%"}
-          />
+          /> */}
         </div>
       </div>
     </div>

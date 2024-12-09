@@ -1,7 +1,7 @@
 import React from "react";
-import FormElements from "@/components/FormElements";
+import FormElements from "../../../components/FormElements";
 import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import DefaultLayout from "../../../components/Layouts/DefaultLayout";
 
 export const metadata = {
   title: "Fee Management System",

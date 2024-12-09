@@ -4,10 +4,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
-
 const options = {
   legend: {
     show: false,
@@ -181,13 +177,13 @@ const ChartOne= () => {
 
       <div>
         <div id="chartOne" className="-ml-5">
-          <ReactApexChart
+          {/* <ReactApexChart
             options={options}
             series={series}
             type="area"
             height={350}
             width={"100%"}
-          />
+          /> */}
         </div>
       </div>
     </div>

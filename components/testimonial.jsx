@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import Image from 'next/image';
 const Testimonial = (props) => {
   return (
     <>
@@ -11,6 +12,7 @@ const Testimonial = (props) => {
               {props.heading1 ?? (
                 <Fragment>
                   <span className="testimonial18-text35">What People Say</span>
+
                 </Fragment>
               )}
             </h2>
@@ -18,7 +20,7 @@ const Testimonial = (props) => {
               {props.content1 ?? (
                 <Fragment>
                   <span className="testimonial18-text32">
-                     I have been assisting parents in managing their children's school fees using this platform for the past year, and it has made the process so much more efficient and hassle-free. I highly recommend it to all parents for its convenience and reliability.!
+                     I have been assisting parents in managing their children&apos;s school fees using this platform for the past year, and it has made the process so much more efficient and hassle-free. I highly recommend it to all parents for its convenience and reliability.!
                   </span>
                 </Fragment>
               )}
@@ -30,7 +32,7 @@ const Testimonial = (props) => {
                 <div className="thq-animated-card-bg-1">
                   <div data-animated="true" className={`thq-card testimonial18-card${num}`}>
                     <div className={`testimonial18-container1${num + 1}`}>
-                      <img
+                      <Image
                         alt={props[`author${num}Alt`]}
                         src={props[`author${num}Src`]}
                         className={`testimonial18-image${num}`}
