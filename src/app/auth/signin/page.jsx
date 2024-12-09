@@ -8,6 +8,7 @@ const SignIn = () => {
     console.log("Sign In Button Clicked");
     router.push('/dashboard');
   }
+  
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
