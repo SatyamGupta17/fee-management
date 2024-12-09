@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
   const router = useRouter();
@@ -17,7 +17,6 @@ const SignIn = () => {
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Sign In to Prakash Public School
               </h2>
-
               <form>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">

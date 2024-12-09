@@ -9,11 +9,11 @@ import CardDataStats from "../../components/CardDataStats";
 import DefaultLayout from '../../components/Layouts/DefaultLayout';
 
 const MapOne = dynamic(() => import("../../components/Maps/MapOne"), {
-  ssr: false, // Disable server-side rendering
+  ssr: false, 
 });
 
 const ChartThree = dynamic(() => import("../../components/Charts/ChartThree"), {
-  ssr: false, // Disable server-side rendering
+  ssr: false, 
 });
 
 
