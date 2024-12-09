@@ -1,5 +1,5 @@
 'use client'
-import React, { Fragment } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import Hero17 from '../../components/hero17'
 import Design from '../../components/design'
