@@ -7,10 +7,7 @@ import Features24 from '../../components/features24'
 import CTA26 from '../../components/cta26'
 import Features25 from '../../components/features25'
 import Steps2 from '../../components/steps2'
-import Testimonial from '../../components/testimonial'
-import ECommerce from "../components/Dashboard/E-commerce";
-// import { Metadata } from "next";
-import DefaultLayout from "../components/Layouts/DefaultLayout";
+import Testimonial from '../../components/testimonial' 
 
 
 const Home = (props) => {

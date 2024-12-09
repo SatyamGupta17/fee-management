@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 const Hero17 = () => {
   const router = useRouter();
   const handleSignInClick = () => {
-    router.push("/auth/signin"); // Redirect to the sign-in page
+    router.push("/auth/signin");
   };
   return (
     <>
