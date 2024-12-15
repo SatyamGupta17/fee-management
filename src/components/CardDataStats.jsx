@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
+import Link from 'next/link';
 
-
+import { useRouter } from "next/navigation";
 const CardDataStats= ({
   title,
   total,
@@ -8,9 +9,16 @@ const CardDataStats= ({
   levelUp,
   levelDown,
   children,
+  links
 }) => {
+  const route = useRouter();
+  const handleClick = () =>{
+    console.log("Card clicked")
+    route.push(links);
+  }
   return (
     <div className="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+      <Link href = {links}>
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
         {children}
       </div>
@@ -62,6 +70,7 @@ const CardDataStats= ({
           )}
         </span>
       </div>
+      </Link>
     </div>
   );
 };

@@ -41,8 +41,8 @@ const menuGroups = [
           </svg>
         ),
         label: "Tution Fee",
-        route: "#",
-        // children: [{ label: "Dashboard", route: "/dashboard" }],
+        route: "/tuition-fees",
+        children: [{ label: "Change Fees", route: "/change-tution-fees" }, {label : 'View Fees', route : 'view-fees'}],
       },
       {
         icon: (
@@ -85,6 +85,7 @@ const menuGroups = [
         ),
         label: "SR Details",
         route: "/profile",
+        // children : [{ label: "Detail Update", route: "/detail-update" }, {label : 'New Student', route : '/new-student' }],
       },
       {
         icon: (

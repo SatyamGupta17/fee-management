@@ -273,26 +273,4 @@ const Steps2 = () => {
   )
 }
 
-Steps2.defaultProps = {
-  step1Description: undefined,
-  step3Description: undefined,
-  step2Title: undefined,
-  step2Description: undefined,
-  step1Title: undefined,
-  step3Title: undefined,
-  step4Description: undefined,
-  step4Title: undefined,
-}
-
-Steps2.propTypes = {
-  step1Description: PropTypes.element,
-  step3Description: PropTypes.element,
-  step2Title: PropTypes.element,
-  step2Description: PropTypes.element,
-  step1Title: PropTypes.element,
-  step3Title: PropTypes.element,
-  step4Description: PropTypes.element,
-  step4Title: PropTypes.element,
-}
-
 export default Steps2

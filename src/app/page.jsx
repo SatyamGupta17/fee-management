@@ -8,7 +8,8 @@ import CTA26 from '../../components/cta26'
 import Features25 from '../../components/features25'
 import Steps2 from '../../components/steps2'
 import Testimonial from '../../components/testimonial' 
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 const Home = (props) => {
   
