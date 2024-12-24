@@ -42,7 +42,7 @@ const menuGroups = [
         ),
         label: "Tution Fee",
         route: "/tuition-fees",
-        children: [{ label: "Change Fees", route: "/change-tution-fees" }, {label : 'View Fees', route : 'view-fees'}],
+        // children: [{ label: "Change Fees", route: "/change-tution-fees" }, {label : 'View Fees', route : 'view-fees'}],
       },
       {
         icon: (
@@ -61,7 +61,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Transportation Fees",
-        route: "/calendar",
+        route: "/transportation-fees",
       },
       {
         icon: (
@@ -84,8 +84,8 @@ const menuGroups = [
           </svg>
         ),
         label: "SR Details",
-        route: "/profile",
-        // children : [{ label: "Detail Update", route: "/detail-update" }, {label : 'New Student', route : '/new-student' }],
+        route: "/students-details",
+        children : [{label : "Students Details", route : "/students-details"}, { label: "Detail Update", route: "/detail-update" }, {label : 'New Student', route : '/new-student' }],
       },
       {
         icon: (

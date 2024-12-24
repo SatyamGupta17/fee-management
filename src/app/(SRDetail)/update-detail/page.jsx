@@ -5,12 +5,13 @@ import 'tailwindcss/tailwind.css';
 import DefaultLayout from '../../../components/Layouts/DefaultLayout';
 import {useRouter} from 'next/navigation';
 
-function TutionFee() { 
+function UpdateDetails() { 
   const router = useRouter();
   const [name, setName] = useState('');
   const [fatherName, setFatherName] = useState('');
   const [address, setAddress] = useState('');
   const [standard, setStandard] = useState('');
+  const [SrNo, setSrNo] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [studentData, setStudentData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);   
@@ -34,13 +35,6 @@ function TutionFee() {
     { id: 14, name: '11TH' },
     { id: 15, name: '12TH' },
   ];
-  const feesChange = [
-    {id : 1, name : '0% Discount'},
-    {id : 2, name : '25% Discount'},
-    {id : 3, name : '50% Discount'},
-    {id : 4, name : '75% Discount'},
-    {id : 5, name : '100% Discount'},
-  ];
 
   const fetchData = async () => {
     try {
@@ -54,7 +48,7 @@ function TutionFee() {
       
       if (Array.isArray(data)) {
         setStudentData(data);
-        console.log(data); // Log to check the structure of data
+        console.log(data); 
       } else {
         console.error('Fetched data is not an array:', data);
       }
@@ -70,8 +64,7 @@ function TutionFee() {
   }, []);
 
   useEffect(() => {
-    let data = studentData || [];  // Ensure it's an array, even if studentData is undefined
-  
+    let data = studentData || []; 
     if (standard) {
       data = data.filter((student) => student.standard === standard);
     }
@@ -84,45 +77,18 @@ function TutionFee() {
     if (address) {
       data = data.filter((student) => student.address.toLowerCase().includes(address.toLowerCase()));
     }
-  
-    setFilteredData(data);  // Set filtered data which is guaranteed to be an array
+    if(SrNo){
+      data = data.filter((student) => student.SrNo === SrNo);
+    }
+    setFilteredData(data);  
     setCurrentPage(1);
-  }, [standard, name, fatherName, address, studentData]);
+  }, [standard, name, fatherName, address, SrNo, studentData]);
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = Array.isArray(filteredData) ? filteredData.slice(indexOfFirstItem, indexOfLastItem) : [];
 
-  const handleFeeChange = async (e, data) => {
-    const selectedDiscount = e.target.value;
-    if (confirm(`Do you want to give a discount of ${selectedDiscount}%?`)) {
-      let fee = data.currentFees;
-      if (selectedDiscount === '25% Discount') {
-        fee = 0.75 * fee;
-      } else if (selectedDiscount === '50% Discount') {
-        fee = 0.5 * fee;
-      } else if (selectedDiscount === '75% Discount') {
-        fee = 0.25 * fee;
-      } else if (selectedDiscount === '100% Discount') {
-        fee = 0;
-      }
-
-      try {
-        const updatedData = { ...data, currentFees: fee };
-        await axios.post(`${process.env.VITE_SERVER_URL}/update-fee`, updatedData, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        alert('Fee updated successfully!');
-        fetchData(); 
-      } catch (error) {
-        console.error('Error updating fee:', error);
-        alert('Failed to update fee.');
-      }
-    }
-  };
 
   return (
     <DefaultLayout>
@@ -137,10 +103,17 @@ function TutionFee() {
         ) : (
           <>
             <div className="flex flex-col items-center justify-center mb-6 bg-blue-100 border border-blue-500 p-4 rounded-lg shadow">
-              <h1 className="text-3xl font-bold text-blue-700">Tuition Fees</h1>
+              <h1 className="text-3xl font-bold text-blue-700">SR Details</h1>
             </div>
 
             <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+              <input
+                className="p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="number"
+                placeholder='Enter SrNo.' 
+                value={SrNo}
+                onChange={(e) => setSrNo(Number(e.target.value))}
+              />
               <input
                 className="p-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
@@ -183,43 +156,33 @@ function TutionFee() {
               <table className="w-full bg-white shadow-md rounded border-collapse">
                 <thead>
                   <tr className="bg-blue-500 text-white">
+                    <th className="p-3 border">SR No.</th>
                     <th className="p-3 border">Name</th>
                     <th className="p-3 border">Father Name</th>
+                    <th className="p-3 border">Mother Name</th>
                     <th className="p-3 border">Class</th>
                     <th className="p-3 border">Address</th>
+                    <th className="p-3 border">DOB</th> 
                     <th className="p-3 border">View Profile</th>
-                    <th className="p-3 border">Current Fees per month</th>
-                    <th className="p-3 border">Change Fees</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentItems.map((data, index) => (
                     <tr key={index} className="even:bg-gray-100">
+                      <td className="p-3 border text-center">{data.SrNo}</td>
                       <td className="p-3 border text-center">{data.name}</td>
                       <td className="p-3 border text-center">{data.fatherName}</td>
+                      <td className="p-3 border text-center">{data.motherName}</td>
                       <td className="p-3 border text-center">{data.standard}</td>
                       <td className="p-3 border text-center">{data.address}</td>
+                      <td className="p-3 border text-center">{new Date(data.DOB).toLocaleDateString('en-GB', {day: '2-digit', month: '2-digit', year: 'numeric',})}</td>
                       <td className="p-3 border text-center">
                         <button
                           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
-                          onClick={() => router.push(`/${data.SrNo}/tuition-fees-view`)}
+                          onClick={() => router.push(`/${data.SrNo}/student-detail-view`)}
                         >
                           Click here
                         </button>
-                      </td>
-                      <td className="p-3 border text-center">{data.currentFees}</td>
-                      <td className="p-3 border text-center">
-                        <select
-                          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
-                          onChange={(e) => handleFeeChange(e, data)}
-                        >
-                          <option value="">Select Option</option>
-                          {feesChange.map((feeOption) => (
-                            <option key={feeOption.id} value={feeOption.name}>
-                              {feeOption.name}
-                            </option>
-                          ))}
-                        </select>
                       </td>
                     </tr>
                   ))}
@@ -252,4 +215,4 @@ function TutionFee() {
   );
 }
 
-export default TutionFee;
+export default UpdateDetails;

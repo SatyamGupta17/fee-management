@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react'
 
-import PropTypes from 'prop-types'
-
 const CTA26 = () => {
   return (
     <>
@@ -134,18 +132,6 @@ const CTA26 = () => {
       </style>
     </>
   )
-}
-
-CTA26.defaultProps = {
-  heading1: undefined,
-  content1: undefined,
-  action1: undefined,
-}
-
-CTA26.propTypes = {
-  heading1: PropTypes.element,
-  content1: PropTypes.element,
-  action1: PropTypes.element,
 }
 
 export default CTA26

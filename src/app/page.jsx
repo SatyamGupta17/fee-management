@@ -142,9 +142,6 @@ const Home = (props) => {
           }
         `}
       </style>
-      {/* <DefaultLayout>
-        <ECommerce />
-      </DefaultLayout> */}
     </>
   )
 }

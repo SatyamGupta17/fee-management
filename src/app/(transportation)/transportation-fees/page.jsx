@@ -5,7 +5,7 @@ import 'tailwindcss/tailwind.css';
 import DefaultLayout from '../../../components/Layouts/DefaultLayout';
 import {useRouter} from 'next/navigation';
 
-function TutionFee() { 
+function TransportationFee() { 
   const router = useRouter();
   const [name, setName] = useState('');
   const [fatherName, setFatherName] = useState('');
@@ -52,12 +52,17 @@ function TutionFee() {
       });
       const data = response.data.data;
       
-      if (Array.isArray(data)) {
-        setStudentData(data);
-        console.log(data); // Log to check the structure of data
-      } else {
-        console.error('Fetched data is not an array:', data);
-      }
+      if (Array.isArray(data)) { 
+        const transportData = data.filter((studentdata) => 
+            studentdata.isTransportation && 
+            studentdata.isTransportation.toLowerCase() === 'yes'
+        );
+        setStudentData(transportData);
+        console.log(transportData);   
+    } else {
+        console.error("Provided data is not an array.");  
+    }
+    
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -137,7 +142,7 @@ function TutionFee() {
         ) : (
           <>
             <div className="flex flex-col items-center justify-center mb-6 bg-blue-100 border border-blue-500 p-4 rounded-lg shadow">
-              <h1 className="text-3xl font-bold text-blue-700">Tuition Fees</h1>
+              <h1 className="text-3xl font-bold text-blue-700">Transportation Fees</h1>
             </div>
 
             <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -202,7 +207,7 @@ function TutionFee() {
                       <td className="p-3 border text-center">
                         <button
                           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
-                          onClick={() => router.push(`/${data.SrNo}/tuition-fees-view`)}
+                          onClick={() => router.push(`/${data.SrNo}/transportation-fees-view`)}
                         >
                           Click here
                         </button>
@@ -252,4 +257,4 @@ function TutionFee() {
   );
 }
 
-export default TutionFee;
+export default TransportationFee;
