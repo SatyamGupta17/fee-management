@@ -45,7 +45,7 @@ function StudentDetailView({ params }) {
     useEffect(() => {
         setTotalFees(numOfMonths * feePerMonth);
         setNumOfMonths(0);
-    }, [monthsSubmitted]);
+    }, [monthsSubmitted, numOfMonths]);
 
     const fetchData = async () => {
         try {
@@ -84,7 +84,7 @@ function StudentDetailView({ params }) {
                     <h1 className="text-3xl font-bold text-blue-700">Student Profile</h1>
                     <div className="mt-4 text-lg">
                         <p><strong>Name:</strong> {filteredData[0]?.name}</p>
-                        <p><strong>Father's Name:</strong> {filteredData[0]?.fatherName}</p>
+                        <p><strong>Father&apos;s Name:</strong> {filteredData[0]?.fatherName}</p>
                         <p><strong>Class:</strong> {filteredData[0]?.standard}</p>
                         <p><strong>Address:</strong> {filteredData[0]?.address}</p>
                     </div>

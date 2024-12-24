@@ -15,7 +15,7 @@ function ReceiptGenerated() {
       <div className="bg-white border p-6 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-4">Fee Receipt</h1>
         <p><strong>Name:</strong> {name}</p>
-        <p><strong>Father's Name:</strong> {fatherName}</p>
+        <p><strong>Father&apos;s Name:</strong> {fatherName}</p>
         <p><strong>Class:</strong> {standard}</p>
         <p><strong>Address:</strong> {address}</p>
         <p><strong>Total Amount Paid:</strong> ₹{totalAmount}</p>

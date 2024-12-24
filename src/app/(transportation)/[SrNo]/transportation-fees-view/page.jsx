@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // For navigation
 import axios from 'axios';
 import DefaultLayout from '../../../../components/Layouts/DefaultLayout';
-import ReceiptGenerated from '../../receiptGenerated/page';
+// import ReceiptGenerated from '../../receiptGenerated/page';
 
 function TransportationFeesView({ params }) {
     const feePerMonth = 1000;
@@ -46,7 +46,7 @@ function TransportationFeesView({ params }) {
     useEffect(() => {
         setTotalFees(numOfMonths * feePerMonth);
         setNumOfMonths(0);
-    }, [monthsSubmitted]);
+    }, [monthsSubmitted, numOfMonths]);
 
     const fetchData = async () => {
         try {
@@ -85,7 +85,7 @@ function TransportationFeesView({ params }) {
                     <h1 className="text-3xl font-bold text-blue-700">Student Profile</h1>
                     <div className="mt-4 text-lg">
                         <p><strong>Name:</strong> {filteredData[0]?.name}</p>
-                        <p><strong>Father's Name:</strong> {filteredData[0]?.fatherName}</p>
+                        <p><strong>Father&apos;s Name:</strong> {filteredData[0]?.fatherName}</p>
                         <p><strong>Class:</strong> {filteredData[0]?.standard}</p>
                         <p><strong>Address:</strong> {filteredData[0]?.address}</p>
                     </div>
