@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 const SignIn = () => {
   const router = useRouter();
   const handleSignIn = () => {
-    console.log("Sign In Button Clicked");
+    // console.log("Sign In Button Clicked");
     router.push('/dashboard');
   }
   
