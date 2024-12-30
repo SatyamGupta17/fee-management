@@ -1,0 +1,86 @@
+student : {
+    PersonalDetail : {
+        SrNo : 132, [numeric]
+        name : 'ABC', [text]
+        fatherName : 'XYZ', [text]
+        motherName : 'PQR', [text]
+        dob : '17-03-12', [calendar]
+        standard/class : 'NURSERY', ['Nursery', 'L.K.G' ,'U.K.G', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th','11th', '12th']
+        dateOfAdmission : '12-04-23', [Calendar]
+        address : 'New Delhi', [text]
+        aadharCardNumber : 132323123223, [numeric 12 digit]
+        isTransportation : 'YES',  [bool 'YES' or 'NO']
+    },
+    ContactDetail : {
+        studentContactNumber: 424322XXXX, [10 digit numeric]
+        parentContactNumber : 1413341XXX, [10 digit numeric]
+        guardianContactNumber: 13124234XX, [10 digit numeric]
+        parentEmailId : kfngkngk@gmail.com, [gmail endwith @gmail.com]
+        studentEmailId :gwfkenkn@gmail.com,  [gmail endwith @gmail.com]
+    },    
+    FeePayment : {
+        TuitionFees : {
+            monthlyFees : 1000,     [numeric]
+            numOfMonthFeeSubmitted: 5, [numeric range 0 to 12]
+            discountPercent : 12, [numeric range 0 to 100]
+            remarks : '',   [text], 
+            FeesReceipt : {
+                invoiceNumber : 12, [unique key numeric]
+                dateofPayment : '17-03-24', [calendar]
+                numberOfmonths : 3,
+                from - to : (numOfMonthFeeSubmitted + 1)- (numberOfmonths + numberOfmonths),
+                totalFeeSubmitted : numberOfmonths * (monthlyFees * (1 - discountPercent / 100)),
+            },
+        },
+        TransportationFees : {
+            monthlyFees : 1000,    [numeric]
+            numOfMonthFeeSubmitted: 5, [numeric range 0 to 12]
+            dateofPayment : '17-03-24', [calendar]
+            discountPercent : 12, [numeric range 0 to 100]
+            remarks : '',       [text]
+            FeesReceipt : {
+                invoiceNumber : 12, [unique key numeric]
+                dateofPayment : '17-03-24', [calendar]
+                numberOfmonths : 3,
+                from - to : (numOfMonthFeeSubmitted + 1)- (numberOfmonths + numberOfmonths),
+                totalFeeSubmitted : numberOfmonths * (monthlyFees * (1 - discountPercent / 100)),
+            },
+        }
+        examinationFees: {
+            annualFee : 500,    [numeric]
+        }
+    },
+    additionDetail : {
+        statusAfterYear : 'Promoted', [Promoted, Failed, Transferred, Jump]
+        additionalCharge : X [numeric value], 
+    } 
+}, 
+
+feestructure : {
+    tuition :{
+        standard/class : 'NURSERY', ['NURSERY', 'LKG' ,'UKG', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th','11th', '12th']  
+        amount : 1000, [numeric]
+        year : 2024-25, [calendar]
+    },
+    transportation :{
+        address : 'Mandawar', ['Mandawar', 'Bijnor', etc list all the village in the Sentence Case],
+        driverName : 'Umang Gupta', (optional)
+        distance : 12km, (optional)
+        transport vehicle : 'Van blue color 2343' (optional)
+        amount : 1000, [numeric]
+        year : 2024-25, [calendar]
+    },
+},
+teacherSalary : {
+    name : 'ABC', [text]
+    role : 'teacher' ['teacher', 'principal', 'clerk', 'wise principal', 'lab assisstant', etc],
+    salary : 23431 
+    dateOfJoining: '12-02-23', [calendar]
+
+}
+Expenditure : {
+    type : '',
+    description : '',
+    amount : 0, [numeric]
+    date : '12-02-23', [calendar]
+}

@@ -166,6 +166,7 @@ function SRDetails() {
                     <th className="p-3 border">Address</th>
                     <th className="p-3 border">DOB</th> 
                     <th className="p-3 border">View Profile</th>
+                    <th className="p-3 border">Update Profile</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -182,6 +183,14 @@ function SRDetails() {
                         <button
                           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
                           onClick={() => router.push(`/${data.SrNo}/student-detail-view`)}
+                        >
+                          Click here
+                        </button>
+                      </td>
+                      <td className="p-3 border text-center">
+                        <button
+                          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
+                          onClick={() => router.push(`/${data.SrNo}/update-student-detail`)}
                         >
                           Click here
                         </button>

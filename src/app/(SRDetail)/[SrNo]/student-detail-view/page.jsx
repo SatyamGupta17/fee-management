@@ -1,165 +1,177 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // For navigation
-import axios from 'axios';
+import 'tailwindcss/tailwind.css';
 import DefaultLayout from '../../../../components/Layouts/DefaultLayout';
-// import ReceiptGenerated from '../../receiptGenerated/page';
+import { useState, useEffect } from 'react';
 
-function StudentDetailView({ params }) { 
-    const router = useRouter();
-    const [studentData, setStudentData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [monthsSubmitted, setMonthsSubmitted] = useState(0);
-    const [numOfMonths, setNumOfMonths] = useState(0);
-    const [totalFees, setTotalFees] = useState(0);
-    const [showAlert, setShowAlert] = useState(false);
-
-    // Function to handle fee submission
-    const handleSubmitFees = () => {
-        const updatedMonthsSubmitted = monthsSubmitted + numOfMonths;
-        setMonthsSubmitted(updatedMonthsSubmitted);
-        setShowAlert(true);
-    };
-
-    // Handle redirect to the ReceiptGenerated page
-    const handleReceiptGenerated = () => {
-        // Prepare data to send as query parameters
-        const dataToSend = {
-            name: filteredData[0]?.name || "",
-            fatherName: filteredData[0]?.fatherName || "",
-            standard: filteredData[0]?.standard || "",
-            address: filteredData[0]?.address || "",
-            totalAmount: totalFees || 0,
-            monthsOfFeeSubmitted: monthsSubmitted || 0,
-        };
-
-        // Debugging output to verify the data
-        console.log("Data to Send:", dataToSend);
-
-        // Ensure the pathname and query are passed correctly
-        // router.push(`/receiptGenerated`);
-        setShowAlert(false);
-        setTotalFees(0);
-    };
-
-    useEffect(() => {
-        setTotalFees(numOfMonths * feePerMonth);
-        setNumOfMonths(0);
-    }, [monthsSubmitted, numOfMonths]);
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(process.env.VITE_SERVER_URL, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            const data = response.data.data;
-            if (Array.isArray(data)) {
-                setStudentData(data);
-            } else {
-                console.error('Fetched data is not an array:', data);
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
+function StudentDetails({ params }) {
+  const [studentDetails, setStudentDetails] = useState([]); 
+  
+  const [filteredData, setFilteredData] = useState([]);
+  const  studentId = params.SrNo;
+  useEffect(() => {
+    const fetchStudentDetails = async () => {
+      try {
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbzo3fG0zLZPtSZg49iZNbitDmH6cqvzQP-pJEKygyOb7aVoE6Moiv4egAByyha-phW-/exec`);
+        if (response.ok) {
+          const data = await response.json();
+          setStudentDetails(data);
+        } else {
+          alert('Failed to fetch student details.');
         }
+      } catch (error) {
+        console.error('Error fetching student details:', error);
+      }
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        if (studentData.length > 0) {
-            const newData = studentData.filter((student) => String(student.SrNo) === String(params.SrNo));
-            setFilteredData(newData);
-        }
-    }, [studentData, params.SrNo]);
-
+    fetchStudentDetails();
+  }, [studentId]);
+  useEffect(() => {
+    if (studentDetails.length > 0) {
+        const newData = studentDetails.filter((student) => String(student.SrNo) === String(studentId));
+        setFilteredData(newData);
+    }
+}, [studentDetails, studentId]);
+  if (!studentDetails) {
     return (
-        <DefaultLayout>
-            <div className="p-6 bg-gray-100 min-h-screen">
-                <div className="mb-6 bg-blue-100 border border-blue-500 p-4 rounded-lg shadow-lg">
-                    <h1 className="text-3xl font-bold text-blue-700">Student Profile</h1>
-                    <div className="mt-4 text-lg">
-                        <p><strong>Name:</strong> {filteredData[0]?.name}</p>
-                        <p><strong>Father&apos;s Name:</strong> {filteredData[0]?.fatherName}</p>
-                        <p><strong>Class:</strong> {filteredData[0]?.standard}</p>
-                        <p><strong>Address:</strong> {filteredData[0]?.address}</p>
-                    </div>
-                </div>
-
-                {/* Fee Submission Section */}
-                <div className="mb-6 bg-white border p-4 rounded-lg shadow-lg">
-                    <h2 className="text-2xl font-bold text-blue-700 mb-4">Fee Submission</h2>
-
-                    <div className="grid grid-cols-6 gap-2 mb-4">
-                        {[
-                            'April', 'May', 'June', 'July', 'August', 'September',
-                            'October', 'November', 'December', 'January', 'February', 'March'
-                        ].map((month, index) => (
-                            <div
-                                key={index}
-                                className={`p-2 border rounded text-center ${index < monthsSubmitted ? 'bg-green-200' : 'bg-red-200'
-                                    }`}
-                            >
-                                <span className="text-sm font-medium">{month}</span>
-                                <br />
-                                <span className="text-xs font-semibold">
-                                    {index < monthsSubmitted ? 'Submitted' : 'Unsubmitted'}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-
-
-                    {/* Fee Submission Input */}
-                    <div className="mb-4">
-                        <label className="text-lg font-semibold">Number of Months to Submit:</label>
-                        <input
-                            type="number"
-                            className="mt-2 p-2 border border-gray-300 rounded"
-                            value={numOfMonths}
-                            onChange={(e) => setNumOfMonths(Number(e.target.value))}
-                            min="0"
-                            max={12 - monthsSubmitted}
-                        />
-                    </div>
-
-                    <button
-                        onClick={handleSubmitFees}
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
-                    >
-                        Submit Fees
-                    </button>
-                </div>
-
-                {/* Total Fee Calculation */}
-                <div className="mt-6 text-right">
-                    <h3 className="text-xl font-bold">Total Fees Submitted: ₹{totalFees}</h3>
-                </div>
-
-                {/* Alert/Modal for Receipt Generation */}
-                {showAlert && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-                        <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                            <h2 className="text-2xl font-bold mb-4">Fee Submission Confirmation</h2>
-                            <p><strong>Name:</strong> {filteredData[0]?.name}</p>
-                            <p><strong>Months of Fee Submitted:</strong> {monthsSubmitted}</p>
-                            <p><strong>Total Amount:</strong> ₹{totalFees}</p>
-                            <button
-                                onClick={handleReceiptGenerated}
-                                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none"
-                            >
-                                Receipt Generated
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </div>
-        </DefaultLayout>
+      <DefaultLayout>
+        <div className="flex justify-center items-center min-h-screen">
+          <p className="text-xl font-semibold text-gray-600">Loading student details...</p>
+        </div>
+      </DefaultLayout>
     );
+  }
+
+  const {
+    name,
+    fatherName,
+    motherName,
+    srNo,
+    dob,
+    address,
+    standard,
+    isTransportation,
+    dateofAdmission,
+    aadharNumber,
+    studentContactNumber,
+    parentContactNumber,
+    guardianContactNumber,
+    studentEmailId,
+    parentEmailId,
+    discountPercentTuitionFee,
+    remarksTuitionFee,
+    discountPercentTransportationFee,
+    remarksTransportationFee,
+  } = studentDetails;
+
+  return (
+    <DefaultLayout>
+      <div className="max-w-4xl mx-auto mt-10 bg-white p-8 shadow-lg rounded-lg">
+        <h1 className="text-3xl font-bold text-blue-700 text-center mb-6">Student Details</h1>
+
+        <div className="space-y-6">
+          {/* Personal Details Section */}
+          <div className="p-6 bg-gray-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Personal Details</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="font-medium text-gray-700">Name:</p>
+                <p className="text-gray-900">{name}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Father's Name:</p>
+                <p className="text-gray-900">{fatherName}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Mother's Name:</p>
+                <p className="text-gray-900">{motherName}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Sr No:</p>
+                <p className="text-gray-900">{srNo}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Date of Birth:</p>
+                <p className="text-gray-900">{dob}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Academic Details Section */}
+          <div className="p-6 bg-gray-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Academic Details</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="font-medium text-gray-700">Address:</p>
+                <p className="text-gray-900">{address}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Standard:</p>
+                <p className="text-gray-900">{standard}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Date of Admission:</p>
+                <p className="text-gray-900">{dateofAdmission}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Transportation:</p>
+                <p className="text-gray-900">{isTransportation ? 'Yes' : 'No'}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Details Section */}
+          <div className="p-6 bg-gray-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Contact Details</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="font-medium text-gray-700">Student Contact Number:</p>
+                <p className="text-gray-900">{studentContactNumber}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Parent Contact Number:</p>
+                <p className="text-gray-900">{parentContactNumber}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Guardian Contact Number:</p>
+                <p className="text-gray-900">{guardianContactNumber}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Student Email ID:</p>
+                <p className="text-gray-900">{studentEmailId}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Parent Email ID:</p>
+                <p className="text-gray-900">{parentEmailId}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Fee Details Section */}
+          <div className="p-6 bg-gray-100 rounded-lg shadow">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Fee Details</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="font-medium text-gray-700">Tuition Fee Discount:</p>
+                <p className="text-gray-900">{discountPercentTuitionFee}%</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Tuition Fee Remarks:</p>
+                <p className="text-gray-900">{remarksTuitionFee}</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Transportation Fee Discount:</p>
+                <p className="text-gray-900">{discountPercentTransportationFee}%</p>
+              </div>
+              <div>
+                <p className="font-medium text-gray-700">Transportation Fee Remarks:</p>
+                <p className="text-gray-900">{remarksTransportationFee}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </DefaultLayout>
+  );
 }
 
-export default StudentDetailView;
+export default StudentDetails;

@@ -85,7 +85,7 @@ const menuGroups = [
         ),
         label: "SR Details",
         route: "/students-details",
-        children : [{label : "Students Details", route : "/students-details"}, { label: "Detail Update", route: "/detail-update" }, {label : 'New Student', route : '/new-student' }],
+        children : [{label : "Students Details", route : "/students-details"}, {label : 'New Student', route : '/new-student' }],
       },
       {
         icon: (
@@ -120,11 +120,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Expenditure",
-        route: "#",
-        children: [
-          { label: "Form Elements", route: "/forms/form-elements" },
-          { label: "Form Layout", route: "/forms/form-layout" },
-        ],
+        route: "/expenditure",    
       },
       
     ],
@@ -165,7 +161,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Fees Structure",
-        route: "/chart",
+        route: "/fee-structure",
       },
       {
         icon: (
@@ -204,11 +200,7 @@ const menuGroups = [
           </svg>
         ),
         label: "Teacher Salary",
-        route: "#",
-        // children: [
-        //   { label: "", route: "/ui/alerts" },
-        //   { label: "", route: "/ui/buttons" },
-        // ],
+        route: "/teacher-salary",
       },
       {
         icon: (
@@ -243,10 +235,10 @@ const menuGroups = [
           </svg>
         ),
         label: "Unpaid Fees",
-        route: "#",
+        route: "/dashboard",
         children: [
-          { label: "Tution Fees", route: "/auth/signin" },
-          { label: "Transportation Fees", route: "/auth/signup" },
+          { label: "Unpaid Tution Fees", route: "/unpaid-tuition-fees" },
+          { label: "Unpaid Transportation Fees", route: "/unpaid-transportation-fees" },
         ],
       },
     ],

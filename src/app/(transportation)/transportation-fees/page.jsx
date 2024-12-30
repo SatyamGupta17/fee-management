@@ -4,7 +4,6 @@ import axios from 'axios';
 import 'tailwindcss/tailwind.css';
 import DefaultLayout from '../../../components/Layouts/DefaultLayout';
 import {useRouter} from 'next/navigation';
-
 function TransportationFee() { 
   const router = useRouter();
   const [name, setName] = useState('');
@@ -16,7 +15,6 @@ function TransportationFee() {
   const [currentPage, setCurrentPage] = useState(1);   
   const [isLoading, setIsLoading] = useState(true);
   const itemsPerPage = 10;
-
   const standards = [
     { id: 1, name: 'NURSERY' },
     { id: 2, name: 'LKG' },
