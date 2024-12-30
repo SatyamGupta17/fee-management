@@ -40,7 +40,7 @@ function UnpaidTuitionFeesReport() {
     };
   
     filterStudents();
-  }, [selectedClass, studentData]);  
+  }, [selectedClass, studentData, currentMonth]);  
   // Handle class change
   const handleClassChange = (newClass) => {
     setSelectedClass(newClass);
@@ -103,44 +103,6 @@ function UnpaidTuitionFeesReport() {
 
         {/* Filters */}
         <div className="flex space-x-4 mb-6">
-        {/*  <div>
-            <label className="block text-sm font-medium mb-1">Filter by Duration</label>
-            <div className="flex space-x-2">
-              <button
-                onClick={() => handleDurationChange('1m')}
-                className={`px-4 py-2 rounded ${
-                  duration === '1m' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                Unpaid Fees
-              </button>
-              <button
-                onClick={() => handleDurationChange('3m')}
-                className={`px-4 py-2 rounded ${
-                  duration === '3m' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                More than 3 Months
-              </button>
-              <button
-                onClick={() => handleDurationChange('6m')}
-                className={`px-4 py-2 rounded ${
-                  duration === '6m' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                More than 6 Months
-              </button>
-              <button
-                onClick={() => handleDurationChange('1y')}
-                className={`px-4 py-2 rounded ${
-                  duration === '1y' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                Whole Year
-              </button>
-            </div>
-          </div>*/}
-
           <div>
             <label className="block text-sm font-medium mb-1">Filter by Class</label>
             <select
@@ -165,7 +127,7 @@ function UnpaidTuitionFeesReport() {
               <thead>
                 <tr className="bg-gray-100 text-left">
                   <th className="border p-2">Name</th>
-                  <th className="border p-2">Father's Name</th>
+                  <th className="border p-2">Father&apos;s Name</th>
                   <th className="border p-2">Class</th>
                   <th className="border p-2">Address</th>
                   <th className="border p-2">Number of Unpaid Fees</th>

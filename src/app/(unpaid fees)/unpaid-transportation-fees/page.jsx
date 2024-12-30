@@ -5,7 +5,7 @@ import axios from 'axios';
 import 'tailwindcss/tailwind.css';
 import DefaultLayout from '../../../components/Layouts/DefaultLayout';
 
-function UnpaidFeesReport() {
+function UnpaidTransportationFeesReport() {
     const [studentData, setStudentData] = useState([]);
     const [selectedClass, setSelectedClass] = useState('Nursery');
     const [selectedAddress, setSelectedAddress] = useState('');
@@ -105,7 +105,7 @@ function UnpaidFeesReport() {
         };
 
         filterStudents();
-    }, [selectedClass, selectedAddress, studentData]);
+    }, [selectedClass, selectedAddress, studentData, currentMonth]);
 
     // Handle Address Filter
     const handleInputChange = (input) => {
@@ -215,7 +215,7 @@ function UnpaidFeesReport() {
                                 <thead>
                                     <tr className="bg-gray-100 text-left">
                                         <th className="border p-2">Name</th>
-                                        <th className="border p-2">Father's Name</th>
+                                        <th className="border p-2">Father&apos;s Name</th>
                                         <th className="border p-2">Class</th>
                                         <th className="border p-2">Address</th>
                                         <th className="border p-2">Unpaid Months</th>
@@ -262,4 +262,4 @@ function UnpaidFeesReport() {
     );
 }
 
-export default UnpaidFeesReport;
+export default UnpaidTransportationFeesReport;

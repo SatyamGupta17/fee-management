@@ -78,11 +78,11 @@ function StudentDetails({ params }) {
                 <p className="text-gray-900">{name}</p>
               </div>
               <div>
-                <p className="font-medium text-gray-700">Father's Name:</p>
+                <p className="font-medium text-gray-700">Father&apos;s Name:</p>
                 <p className="text-gray-900">{fatherName}</p>
               </div>
               <div>
-                <p className="font-medium text-gray-700">Mother's Name:</p>
+                <p className="font-medium text-gray-700">Mother&apos;s Name:</p>
                 <p className="text-gray-900">{motherName}</p>
               </div>
               <div>

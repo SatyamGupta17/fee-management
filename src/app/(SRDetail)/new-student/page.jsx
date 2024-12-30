@@ -119,7 +119,7 @@ function NewStudentDetails() {
                 />
               </div>
               <div>
-                <label className="block font-medium mb-1 text-gray-700">Father's Name</label>
+                <label className="block font-medium mb-1 text-gray-700">Father&apos;s Name</label>
                 <input
                   type="text"
                   name="fatherName"
@@ -130,7 +130,7 @@ function NewStudentDetails() {
                 />
               </div>
               <div>
-                <label className="block font-medium mb-1 text-gray-700">Mother's Name</label>
+                <label className="block font-medium mb-1 text-gray-700">Mother&apos;  s Name</label>
                 <input
                   type="text"
                   name="motherName"
